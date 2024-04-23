@@ -22,7 +22,7 @@ public class Paar <E,Z> {
     }
     @Override
     public String toString(){
-        return Paar.this.getFirst().toString()+Paar.this.getSecond().toString();
+        return "Paar [first:" + first + ", second:" + second + "]";
     }
     @Override
     public boolean equals(Object o){

@@ -10,32 +10,33 @@ public class Kind extends Personen{
         super(name, geburtsjahr);
     }
 
-    //Constructor with 2 Persons as Input
-    public Kind (String name, int geburtsjahr, Personen vater, Personen mutter){
-        super(name, geburtsjahr);
-        this.eltern.setFirst(vater);
-        this.eltern.setSecond(mutter);
-    }
-
     public String getName() {
         return name;
     }
+
+
     public int getGeburtsjahr() {
         return geburtsjahr;
     }
+
+
     @Override
     public String toString() {
         return name+" "+"("+geburtsjahr+")";
     }
 
+
     public void setEltern(Personen vater,Personen mutter){
-        this.eltern.setFirst(vater);
-        this.eltern.setSecond(mutter);
+        if(eltern == null) {
+            eltern = new Paar<>(vater, mutter);
+            this.eltern.setFirst(vater);
+            this.eltern.setSecond(mutter);
+        }else{
+            throw (new RuntimeException("Eltern not null or allready set"));
+        }
     }
 
     public Paar<Personen, Personen> getEltern(){
-        System.out.println("Vater: "+this.eltern.getFirst());
-        System.out.println("Mutter: "+this.eltern.getSecond());
         return this.eltern;
     }
 
