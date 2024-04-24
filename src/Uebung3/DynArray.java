@@ -9,7 +9,6 @@ package Uebung3;
  */
 
 public class DynArray<T> {
-
     /**
      *  methoden die ich benutzen kann  -> size
      *                                  -> isEmpty
@@ -41,9 +40,11 @@ public class DynArray<T> {
         return size;
     }
 
+
     public boolean isEmpty() {
         return size == 0;
     }
+
 
     public void set(int pos, T e) throws IndexOutOfBoundsException {
         // Aendern von bereits belegten Positionen
@@ -52,11 +53,13 @@ public class DynArray<T> {
         array[pos]= e;
     }
 
+
     public T get(int pos) throws IndexOutOfBoundsException {
         if (pos < 0 || pos >= size)
             throw new IndexOutOfBoundsException();
         return array[pos];
     }
+
 
     public void add(T e) {
         // hinzufuegen neuer Elemente
@@ -65,12 +68,14 @@ public class DynArray<T> {
         array[size++] = e;
     }
 
+
     public String toString() {
         String  s = "";
         for (int i = 0; i < size; i++)
             s = s + array[i] + "\t";
         return s;
     }
+
 
     @SuppressWarnings("unchecked")
     private void increase() {
@@ -94,13 +99,19 @@ public class DynArray<T> {
 
     //remove mit input
     public void  remove (int pos){
-    if(pos > size || pos < 0){
-        throw new IndexOutOfBoundsException();
+        T[] neu = (T[]) new Object[array.length];
+
+        if(pos > array.length || pos < 0){
+            System.out.println(-1);
         }
-    array[pos] = null;
-    for (int i = pos; i < array.length; i++){
-        array[i] = array[i+1];
+
+        for (int i = 0; i < pos; i++){
+            neu[i] = array[i];
         }
+        for (int i = pos; i < array.length -1; i++){
+            neu[i] = array[i+1];
+        }
+        array = neu;
     }
 
 
@@ -113,43 +124,52 @@ public class DynArray<T> {
         }
     }
 
+
     //delete erstes vorkommen von element in array
     public void delete (T e){
         int positionVonE = positionOfElement(e);
         remove(positionVonE);
     }
 
+
     //ist das element e im string ?
     public boolean contains(T e){
         boolean ret = false;
         for(int i=0; i < size; i++){
-            if(array[i].equals(e)){ // wenn an der stelle i das element e steht ret = true
+            if(array[i] != null && array[i].equals(e)){ // wenn an der stelle i das element e steht ret = true
                 ret = true ;
             }
         }
         return ret;
     }
-    //hilfmethode für delete zeile 98
-    public int positionOfElement (T e){
-        for(int i = 0; i < size; i++){
-            if(array[i].equals(e)){
+
+
+    public int positionOfElement(T e) {
+        if (e == null) {
+            // Wenn das gesuchte Element null ist, gibt es keinen Sinn, weiter zu suchen
+            return -1;
+        }
+
+        for (int i = 0; i < size; i++) {
+            if (array[i] != null && array[i].equals(e)) {
                 return i;
             }
         }
         return -1;
     }
 
+
     public void decrease (){
-        T[] neu = (T[]) new Object[array.length*2]; // neues array mit hälfte der size
-        if (size*4< array.length) {                 // ist size*4 < array.length prüft ob max 25% gefüllt sind
-            if(array.length/2<startGroesse){        // wir wollen das array nur halbieren so lange es größer als starGrösse
+        T[] neu = (T[]) new Object[array.length/2];   // neues array mit hälfte der size
+        if (size*4< array.length) {                   // ist size*4 < array.length prüft ob max 25% gefüllt sind
+            if(array.length/2<startGroesse){          // wir wollen das array nur halbieren so lange es größer als starGrösse
                 System.out.println("array ist zu kurz zum halbieren");
             }                                       // wenn nicht zu kurz dann schreib alt in neu
-            for(int i = 0; i< array.length;){
+            for(int i = 0; i< neu.length;){
                 neu [i] = array [i];
-                array = neu;                        // neu = alt
+                                // neu = alt
             }
-
+            array=neu;
         }
     }
 
