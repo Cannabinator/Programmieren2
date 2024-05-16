@@ -1,4 +1,7 @@
 package Uebung3;
+
+import java.util.Iterator;
+
 /**
  * @author sw
  *
@@ -8,7 +11,7 @@ package Uebung3;
  * noch ohne remove, delete, decrease
  */
 
-public class DynArray<T> {
+public class DynArray<T>{
     /**
      *  methoden die ich benutzen kann  -> size
      *                                  -> isEmpty
@@ -172,6 +175,10 @@ public class DynArray<T> {
             array=neu;
         }
     }
+
+
+    // chatGPT is my hero.
+
 
 
 
