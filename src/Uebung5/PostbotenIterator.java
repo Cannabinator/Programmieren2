@@ -23,8 +23,8 @@ public class PostbotenIterator<T> implements Iterator<T> {
     public PostbotenIterator(T[] array){
         this.array=array;
         this.length =array.length;
-        this.oddIndex = (length % 2 == 0) ? 1 : 0;
-        this.evenIndex = length - 1;
+        this.oddIndex = 0;
+        this.evenIndex = ((array.length % 2 == 0)? array.length-1:array.length);
 
     }
 
